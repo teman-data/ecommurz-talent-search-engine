@@ -31,7 +31,7 @@ def get_similarity_score(model, data, query, corpus_embeddings):
     result.sort_values(by=['score', 'Last Day'], ascending=[False, True], inplace=True)
     return result
 
-@st.cache(allow_output_mutation=True)
+@st.cache(ttl=24*3600)
 def create_embedding(model: SentenceTransformer, data: pd.DataFrame, key: str) -> Tuple[list, list]:
     """Create vector embeddings from the dataset"""
     corpus_sentences = data[key].astype(str).tolist()
